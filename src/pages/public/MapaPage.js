@@ -47,7 +47,6 @@ const MapaPage = () => {
     
     const [searchPoint, setSearchPoint] = useState([-27.5953, -48.5480]);
     const [mapZoom, setMapZoom] = useState(13);
-    const [raio, setRaio] = useState(50);
     const [locais, setLocais] = useState([]);
     const [termo, setTermo] = useState('');
     const [filtroTipo, setFiltroTipo] = useState('todos');
@@ -178,7 +177,17 @@ const MapaPage = () => {
                         ))}
                         <Marker position={searchPoint} icon={iconUsuario} />
                     </MapContainer>
-                    <button onClick={() => navigator.geolocation.getCurrentPosition(p => setSearchPoint([p.coords.latitude, p.coords.longitude]))} style={s.btnAlvo}><Target size={26} /></button>
+                    
+                    {/* BOTÃO ALVO - POSIÇÃO DINÂMICA PARA NÃO SUMIR NO MOBILE */}
+                    <button 
+                        onClick={() => navigator.geolocation.getCurrentPosition(p => setSearchPoint([p.coords.latitude, p.coords.longitude]))} 
+                        style={{
+                            ...s.btnAlvo, 
+                            bottom: isMobile ? (abaDetalhesAberta ? '260px' : '40px') : '25px'
+                        }}
+                    >
+                        <Target size={26} />
+                    </button>
                 </div>
             </div>
 
@@ -236,7 +245,7 @@ const s = {
     results: { flex: 1, overflowY: 'auto' },
     card: { padding: '15px 10px', borderBottom: '1px solid #f1f5f9', display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer' },
     mapArea: { flex: 1, position: 'relative' },
-    btnAlvo: { position: 'absolute', bottom: '25px', right: '20px', zIndex: 1000, width: '50px', height: '50px', borderRadius: '50%', background: '#fff', border: 'none', boxShadow: '0 4px 15px rgba(0,0,0,0.25)', color: '#7d7dbf', cursor: 'pointer', display: 'flex', justifyContent: 'center', alignItems: 'center' },
+    btnAlvo: { position: 'absolute', right: '20px', zIndex: 1000, width: '50px', height: '50px', borderRadius: '50%', background: '#fff', border: 'none', boxShadow: '0 4px 15px rgba(0,0,0,0.3)', color: '#7d7dbf', cursor: 'pointer', display: 'flex', justifyContent: 'center', alignItems: 'center', transition: 'bottom 0.3s ease-in-out' },
     sheetOverlay: { position: 'fixed', inset: 0, background: 'rgba(15, 23, 42, 0.5)', zIndex: 1200, display: 'flex', alignItems: 'flex-end' },
     bottomSheet: { width: '100%', background: '#fff', borderTopLeftRadius: '28px', borderTopRightRadius: '28px', padding: '15px 20px 30px', boxShadow: '0 -10px 30px rgba(0,0,0,0.15)', animation: 'slideUp 0.3s ease-out' },
     sheetHandle: { width: '40px', height: '5px', background: '#e2e8f0', borderRadius: '10px', margin: '0 auto 15px' },
