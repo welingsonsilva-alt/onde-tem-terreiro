@@ -136,6 +136,11 @@ const MapaPage = () => {
                 <aside style={{...s.sidebar, transform: sidebarAberta ? 'translateX(0)' : 'translateX(-100%)', width: isMobile ? '100%' : '350px', position: isMobile ? 'absolute' : 'relative'}}>
                     {isMobile && <div style={s.sidebarHeaderMobile}><h3 style={{margin:0}}>Filtros</h3><button onClick={() => setSidebarAberta(false)} style={s.sheetClose}><X size={20}/></button></div>}
                     
+                    {/* BOTÃO INDICAÇÃO - REATIVADO AQUI */}
+                    <button onClick={() => setModalIndicarAberto(true)} style={s.btnIndicarSidebar}>
+                        <PlusCircle size={18} /> Indicar Novo Local
+                    </button>
+
                     <div style={s.tabContainer}>
                         <button onClick={() => setFiltroTipo('todos')} style={filtroTipo === 'todos' ? s.tabOn : s.tabOff}>Todos</button>
                         <button onClick={() => setFiltroTipo('terreiro')} style={filtroTipo === 'terreiro' ? s.tabOn : s.tabOff}>Terreiros</button>
@@ -178,7 +183,6 @@ const MapaPage = () => {
                         <Marker position={searchPoint} icon={iconUsuario} />
                     </MapContainer>
                     
-                    {/* BOTÃO ALVO - POSIÇÃO DINÂMICA PARA NÃO SUMIR NO MOBILE */}
                     <button 
                         onClick={() => navigator.geolocation.getCurrentPosition(p => setSearchPoint([p.coords.latitude, p.coords.longitude]))} 
                         style={{
@@ -233,6 +237,10 @@ const s = {
     main: { flex: 1, display: 'flex', overflow: 'hidden', position: 'relative' },
     sidebar: { background: '#fff', height: '100%', padding: '15px', display: 'flex', flexDirection: 'column', zIndex: 1150, transition: 'transform 0.3s ease-in-out' },
     sidebarHeaderMobile: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px', paddingBottom: '10px', borderBottom: '1px solid #eee' },
+    
+    // NOVO ESTILO DO BOTÃO DE INDICAÇÃO
+    btnIndicarSidebar: { width: '100%', background: '#f8fafc', color: '#7d7dbf', border: '1px dashed #7d7dbf', borderRadius: '12px', padding: '12px', marginBottom: '15px', fontWeight: 'bold', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', cursor: 'pointer' },
+    
     tabContainer: { display: 'flex', gap: '5px', marginBottom: '15px', flexShrink: 0 },
     tabOn: { flex: 1, padding: '10px', background: '#7d7dbf', color: '#fff', border: 'none', borderRadius: '10px', fontWeight: 'bold', fontSize: '0.85rem' },
     tabOff: { flex: 1, padding: '10px', background: '#f1f5f9', color: '#64748b', border: 'none', borderRadius: '10px', fontSize: '0.85rem' },
