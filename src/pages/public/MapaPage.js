@@ -161,7 +161,7 @@ const MapaPage = () => {
                             <span>Distância máxima</span>
                             <strong>{raio} km</strong>
                         </div>
-                        <input type="range" min="1" max="200" value={raio} onChange={e => setRaio(Number(e.target.value))} style={{ width: '100%', accentColor: '#7d7dbf', cursor: 'pointer' }} />
+                        <input type="range" min="1" max="100" value={raio} onChange={e => setRaio(Number(e.target.value))} style={{ width: '100%', accentColor: '#7d7dbf', cursor: 'pointer' }} />
                     </div>
 
                     <div style={styles.results}>
